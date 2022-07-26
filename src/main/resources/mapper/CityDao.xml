@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="prv.rcl.dao.CityDao">
+    <sql id="baseColumn">
+        id,state_id,code,name,cname,lower_name,code_full
+    </sql>
+    <select id="queryByStateId" resultType="prv.rcl.entity.Cities">
+        select c.*
+        from states s,
+             cities c
+        where s.id = #{state_id}
+          and s.id = c.state_id;
+    </select>
+    <select id="queryByCityId" resultType="prv.rcl.entity.Cities">
+        select
+        <include refid="baseColumn"/>
+        from
+        cities
+        where id = #{city_id}
+    </select>
+</mapper>

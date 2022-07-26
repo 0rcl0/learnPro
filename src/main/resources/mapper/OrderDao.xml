@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="prv.rcl.dao.OrderDao">
+
+    <resultMap id="BaseResultMap" type="prv.rcl.entity.Order">
+        <!--@Table order-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="orderNo" column="order_no" jdbcType="VARCHAR"/>
+        <result property="orderSn" column="order_sn" jdbcType="VARCHAR"/>
+        <result property="memberId" column="member_id" jdbcType="INTEGER"/>
+        <result property="supplierId" column="supplier_id" jdbcType="INTEGER"/>
+        <result property="supplierName" column="supplier_name" jdbcType="VARCHAR"/>
+        <result property="orderStatus" column="order_status" jdbcType="INTEGER"/>
+        <result property="afterStatus" column="after_status" jdbcType="INTEGER"/>
+        <result property="productCount" column="product_count" jdbcType="INTEGER"/>
+        <result property="productAmountTotal" column="product_amount_total" jdbcType="NUMERIC"/>
+        <result property="orderAmountTotal" column="order_amount_total" jdbcType="NUMERIC"/>
+        <result property="logisticsFee" column="logistics_fee" jdbcType="NUMERIC"/>
+        <result property="addressId" column="address_id" jdbcType="INTEGER"/>
+        <result property="payChannel" column="pay_channel" jdbcType="INTEGER"/>
+        <result property="outTradeNo" column="out_trade_no" jdbcType="VARCHAR"/>
+        <result property="escrowTradeNo" column="escrow_trade_no" jdbcType="VARCHAR"/>
+        <result property="payTime" column="pay_time" jdbcType="INTEGER"/>
+        <result property="deliveryTime" column="delivery_time" jdbcType="INTEGER"/>
+        <result property="orderSettlementStatus" column="order_settlement_status" jdbcType="INTEGER"/>
+        <result property="orderSettlementTime" column="order_settlement_time" jdbcType="INTEGER"/>
+        <result property="isPackage" column="is_package" jdbcType="VARCHAR"/>
+        <result property="isIntegral" column="is_integral" jdbcType="VARCHAR"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, order_no, order_sn, member_id, supplier_id, supplier_name, order_status, after_status, product_count, product_amount_total, order_amount_total, logistics_fee, address_id, pay_channel, out_trade_no, escrow_trade_no, pay_time, delivery_time, order_settlement_status, order_settlement_time, is_package, is_integral, created_at, updated_at, deleted_at
+        from order
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, order_no, order_sn, member_id, supplier_id, supplier_name, order_status, after_status, product_count, product_amount_total, order_amount_total, logistics_fee, address_id, pay_channel, out_trade_no, escrow_trade_no, pay_time, delivery_time, order_settlement_status, order_settlement_time, is_package, is_integral, created_at, updated_at, deleted_at
+        from order
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="orderNo != null and orderNo != ''">
+                and order_no = #{orderNo}
+            </if>
+            <if test="orderSn != null and orderSn != ''">
+                and order_sn = #{orderSn}
+            </if>
+            <if test="memberId != null">
+                and member_id = #{memberId}
+            </if>
+            <if test="supplierId != null">
+                and supplier_id = #{supplierId}
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                and supplier_name = #{supplierName}
+            </if>
+            <if test="orderStatus != null">
+                and order_status = #{orderStatus}
+            </if>
+            <if test="afterStatus != null">
+                and after_status = #{afterStatus}
+            </if>
+            <if test="productCount != null">
+                and product_count = #{productCount}
+            </if>
+            <if test="productAmountTotal != null">
+                and product_amount_total = #{productAmountTotal}
+            </if>
+            <if test="orderAmountTotal != null">
+                and order_amount_total = #{orderAmountTotal}
+            </if>
+            <if test="logisticsFee != null">
+                and logistics_fee = #{logisticsFee}
+            </if>
+            <if test="addressId != null">
+                and address_id = #{addressId}
+            </if>
+            <if test="payChannel != null">
+                and pay_channel = #{payChannel}
+            </if>
+            <if test="outTradeNo != null and outTradeNo != ''">
+                and out_trade_no = #{outTradeNo}
+            </if>
+            <if test="escrowTradeNo != null and escrowTradeNo != ''">
+                and escrow_trade_no = #{escrowTradeNo}
+            </if>
+            <if test="payTime != null">
+                and pay_time = #{payTime}
+            </if>
+            <if test="deliveryTime != null">
+                and delivery_time = #{deliveryTime}
+            </if>
+            <if test="orderSettlementStatus != null">
+                and order_settlement_status = #{orderSettlementStatus}
+            </if>
+            <if test="orderSettlementTime != null">
+                and order_settlement_time = #{orderSettlementTime}
+            </if>
+            <if test="isPackage != null">
+                and is_package = #{isPackage}
+            </if>
+            <if test="isIntegral != null">
+                and is_integral = #{isIntegral}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, order_no, order_sn, member_id, supplier_id, supplier_name, order_status, after_status, product_count, product_amount_total, order_amount_total, logistics_fee, address_id, pay_channel, out_trade_no, escrow_trade_no, pay_time, delivery_time, order_settlement_status, order_settlement_time, is_package, is_integral, created_at, updated_at, deleted_at
+        from mail.order
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from order
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="orderNo != null and orderNo != ''">
+                and order_no = #{orderNo}
+            </if>
+            <if test="orderSn != null and orderSn != ''">
+                and order_sn = #{orderSn}
+            </if>
+            <if test="memberId != null">
+                and member_id = #{memberId}
+            </if>
+            <if test="supplierId != null">
+                and supplier_id = #{supplierId}
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                and supplier_name = #{supplierName}
+            </if>
+            <if test="orderStatus != null">
+                and order_status = #{orderStatus}
+            </if>
+            <if test="afterStatus != null">
+                and after_status = #{afterStatus}
+            </if>
+            <if test="productCount != null">
+                and product_count = #{productCount}
+            </if>
+            <if test="productAmountTotal != null">
+                and product_amount_total = #{productAmountTotal}
+            </if>
+            <if test="orderAmountTotal != null">
+                and order_amount_total = #{orderAmountTotal}
+            </if>
+            <if test="logisticsFee != null">
+                and logistics_fee = #{logisticsFee}
+            </if>
+            <if test="addressId != null">
+                and address_id = #{addressId}
+            </if>
+            <if test="payChannel != null">
+                and pay_channel = #{payChannel}
+            </if>
+            <if test="outTradeNo != null and outTradeNo != ''">
+                and out_trade_no = #{outTradeNo}
+            </if>
+            <if test="escrowTradeNo != null and escrowTradeNo != ''">
+                and escrow_trade_no = #{escrowTradeNo}
+            </if>
+            <if test="payTime != null">
+                and pay_time = #{payTime}
+            </if>
+            <if test="deliveryTime != null">
+                and delivery_time = #{deliveryTime}
+            </if>
+            <if test="orderSettlementStatus != null">
+                and order_settlement_status = #{orderSettlementStatus}
+            </if>
+            <if test="orderSettlementTime != null">
+                and order_settlement_time = #{orderSettlementTime}
+            </if>
+            <if test="isPackage != null">
+                and is_package = #{isPackage}
+            </if>
+            <if test="isIntegral != null">
+                and is_integral = #{isIntegral}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into order(order_no, order_sn, member_id, supplier_id, supplier_name, order_status, after_status, product_count, product_amount_total, order_amount_total, logistics_fee, address_id, pay_channel, out_trade_no, escrow_trade_no, pay_time, delivery_time, order_settlement_status, order_settlement_time, is_package, is_integral, created_at, updated_at, deleted_at)
+        values (#{orderNo}, #{orderSn}, #{memberId}, #{supplierId}, #{supplierName}, #{orderStatus}, #{afterStatus}, #{productCount}, #{productAmountTotal}, #{orderAmountTotal}, #{logisticsFee}, #{addressId}, #{payChannel}, #{outTradeNo}, #{escrowTradeNo}, #{payTime}, #{deliveryTime}, #{orderSettlementStatus}, #{orderSettlementTime}, #{isPackage}, #{isIntegral}, #{createdAt}, #{updatedAt}, #{deletedAt})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into order(order_no, order_sn, member_id, supplier_id, supplier_name, order_status, after_status, product_count, product_amount_total, order_amount_total, logistics_fee, address_id, pay_channel, out_trade_no, escrow_trade_no, pay_time, delivery_time, order_settlement_status, order_settlement_time, is_package, is_integral, created_at, updated_at, deleted_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.orderNo}, #{entity.orderSn}, #{entity.memberId}, #{entity.supplierId}, #{entity.supplierName}, #{entity.orderStatus}, #{entity.afterStatus}, #{entity.productCount}, #{entity.productAmountTotal}, #{entity.orderAmountTotal}, #{entity.logisticsFee}, #{entity.addressId}, #{entity.payChannel}, #{entity.outTradeNo}, #{entity.escrowTradeNo}, #{entity.payTime}, #{entity.deliveryTime}, #{entity.orderSettlementStatus}, #{entity.orderSettlementTime}, #{entity.isPackage}, #{entity.isIntegral}, #{entity.createdAt}, #{entity.updatedAt}, #{entity.deletedAt})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into order(order_no, order_sn, member_id, supplier_id, supplier_name, order_status, after_status, product_count, product_amount_total, order_amount_total, logistics_fee, address_id, pay_channel, out_trade_no, escrow_trade_no, pay_time, delivery_time, order_settlement_status, order_settlement_time, is_package, is_integral, created_at, updated_at, deleted_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.orderNo}, #{entity.orderSn}, #{entity.memberId}, #{entity.supplierId}, #{entity.supplierName}, #{entity.orderStatus}, #{entity.afterStatus}, #{entity.productCount}, #{entity.productAmountTotal}, #{entity.orderAmountTotal}, #{entity.logisticsFee}, #{entity.addressId}, #{entity.payChannel}, #{entity.outTradeNo}, #{entity.escrowTradeNo}, #{entity.payTime}, #{entity.deliveryTime}, #{entity.orderSettlementStatus}, #{entity.orderSettlementTime}, #{entity.isPackage}, #{entity.isIntegral}, #{entity.createdAt}, #{entity.updatedAt}, #{entity.deletedAt})
+        </foreach>
+        on duplicate key update
+        order_no = values(order_no),
+        order_sn = values(order_sn),
+        member_id = values(member_id),
+        supplier_id = values(supplier_id),
+        supplier_name = values(supplier_name),
+        order_status = values(order_status),
+        after_status = values(after_status),
+        product_count = values(product_count),
+        product_amount_total = values(product_amount_total),
+        order_amount_total = values(order_amount_total),
+        logistics_fee = values(logistics_fee),
+        address_id = values(address_id),
+        pay_channel = values(pay_channel),
+        out_trade_no = values(out_trade_no),
+        escrow_trade_no = values(escrow_trade_no),
+        pay_time = values(pay_time),
+        delivery_time = values(delivery_time),
+        order_settlement_status = values(order_settlement_status),
+        order_settlement_time = values(order_settlement_time),
+        is_package = values(is_package),
+        is_integral = values(is_integral),
+        created_at = values(created_at),
+        updated_at = values(updated_at),
+        deleted_at = values(deleted_at)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update order
+        <set>
+            <if test="orderNo != null and orderNo != ''">
+                order_no = #{orderNo},
+            </if>
+            <if test="orderSn != null and orderSn != ''">
+                order_sn = #{orderSn},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId},
+            </if>
+            <if test="supplierId != null">
+                supplier_id = #{supplierId},
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                supplier_name = #{supplierName},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus},
+            </if>
+            <if test="afterStatus != null">
+                after_status = #{afterStatus},
+            </if>
+            <if test="productCount != null">
+                product_count = #{productCount},
+            </if>
+            <if test="productAmountTotal != null">
+                product_amount_total = #{productAmountTotal},
+            </if>
+            <if test="orderAmountTotal != null">
+                order_amount_total = #{orderAmountTotal},
+            </if>
+            <if test="logisticsFee != null">
+                logistics_fee = #{logisticsFee},
+            </if>
+            <if test="addressId != null">
+                address_id = #{addressId},
+            </if>
+            <if test="payChannel != null">
+                pay_channel = #{payChannel},
+            </if>
+            <if test="outTradeNo != null and outTradeNo != ''">
+                out_trade_no = #{outTradeNo},
+            </if>
+            <if test="escrowTradeNo != null and escrowTradeNo != ''">
+                escrow_trade_no = #{escrowTradeNo},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime},
+            </if>
+            <if test="deliveryTime != null">
+                delivery_time = #{deliveryTime},
+            </if>
+            <if test="orderSettlementStatus != null">
+                order_settlement_status = #{orderSettlementStatus},
+            </if>
+            <if test="orderSettlementTime != null">
+                order_settlement_time = #{orderSettlementTime},
+            </if>
+            <if test="isPackage != null">
+                is_package = #{isPackage},
+            </if>
+            <if test="isIntegral != null">
+                is_integral = #{isIntegral},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+            <if test="deletedAt != null">
+                deleted_at = #{deletedAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from order where id = #{id}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="prv.rcl.dao.ProductAttributeAndOptionDao">
+
+    <resultMap id="BaseResultMap" type="prv.rcl.entity.ProductAttributeAndOption">
+        <!--@Table product_attribute_and_option-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="skuId" column="sku_id" jdbcType="INTEGER"/>
+        <result property="optionId" column="option_id" jdbcType="INTEGER"/>
+        <result property="attributeId" column="attribute_id" jdbcType="INTEGER"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="supplierOptionId" column="supplier_option_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, sku_id, option_id, attribute_id, sort, supplier_option_id
+        from product_attribute_and_option
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, sku_id, option_id, attribute_id, sort, supplier_option_id
+        from product_attribute_and_option
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="skuId != null">
+                and sku_id = #{skuId}
+            </if>
+            <if test="optionId != null">
+                and option_id = #{optionId}
+            </if>
+            <if test="attributeId != null">
+                and attribute_id = #{attributeId}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="supplierOptionId != null">
+                and supplier_option_id = #{supplierOptionId}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, sku_id, option_id, attribute_id, sort, supplier_option_id
+        from mail.product_attribute_and_option
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from product_attribute_and_option
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="skuId != null">
+                and sku_id = #{skuId}
+            </if>
+            <if test="optionId != null">
+                and option_id = #{optionId}
+            </if>
+            <if test="attributeId != null">
+                and attribute_id = #{attributeId}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="supplierOptionId != null">
+                and supplier_option_id = #{supplierOptionId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into product_attribute_and_option(sku_id, option_id, attribute_id, sort, supplier_option_id)
+        values (#{skuId}, #{optionId}, #{attributeId}, #{sort}, #{supplierOptionId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into product_attribute_and_option(sku_id, option_id, attribute_id, sort, supplier_option_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.skuId}, #{entity.optionId}, #{entity.attributeId}, #{entity.sort}, #{entity.supplierOptionId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into product_attribute_and_option(sku_id, option_id, attribute_id, sort, supplier_option_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.skuId}, #{entity.optionId}, #{entity.attributeId}, #{entity.sort}, #{entity.supplierOptionId})
+        </foreach>
+        on duplicate key update
+        sku_id = values(sku_id),
+        option_id = values(option_id),
+        attribute_id = values(attribute_id),
+        sort = values(sort),
+        supplier_option_id = values(supplier_option_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update product_attribute_and_option
+        <set>
+            <if test="skuId != null">
+                sku_id = #{skuId},
+            </if>
+            <if test="optionId != null">
+                option_id = #{optionId},
+            </if>
+            <if test="attributeId != null">
+                attribute_id = #{attributeId},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="supplierOptionId != null">
+                supplier_option_id = #{supplierOptionId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from product_attribute_and_option where id = #{id}
+    </delete>
+
+</mapper>
+

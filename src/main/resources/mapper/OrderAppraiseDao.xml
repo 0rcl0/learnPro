@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="prv.rcl.dao.OrderAppraiseDao">
+
+    <resultMap id="BaseResultMap" type="prv.rcl.entity.OrderAppraise">
+        <!--@Table order_appraise-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="orderId" column="order_id" jdbcType="INTEGER"/>
+        <result property="info" column="info" jdbcType="VARCHAR"/>
+        <result property="level" column="level" jdbcType="VARCHAR"/>
+        <result property="descStar" column="desc_star" jdbcType="INTEGER"/>
+        <result property="logisticsStar" column="logistics_star" jdbcType="INTEGER"/>
+        <result property="attitudeStar" column="attitude_star" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, order_id, info, level, desc_star, logistics_star, attitude_star, created_at, updated_at
+        from order_appraise
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, order_id, info, level, desc_star, logistics_star, attitude_star, created_at, updated_at
+        from order_appraise
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="orderId != null">
+                and order_id = #{orderId}
+            </if>
+            <if test="info != null and info != ''">
+                and info = #{info}
+            </if>
+            <if test="level != null">
+                and level = #{level}
+            </if>
+            <if test="descStar != null">
+                and desc_star = #{descStar}
+            </if>
+            <if test="logisticsStar != null">
+                and logistics_star = #{logisticsStar}
+            </if>
+            <if test="attitudeStar != null">
+                and attitude_star = #{attitudeStar}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, order_id, info, level, desc_star, logistics_star, attitude_star, created_at, updated_at
+        from mail.order_appraise
+    </select>
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from order_appraise
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="orderId != null">
+                and order_id = #{orderId}
+            </if>
+            <if test="info != null and info != ''">
+                and info = #{info}
+            </if>
+            <if test="level != null">
+                and level = #{level}
+            </if>
+            <if test="descStar != null">
+                and desc_star = #{descStar}
+            </if>
+            <if test="logisticsStar != null">
+                and logistics_star = #{logisticsStar}
+            </if>
+            <if test="attitudeStar != null">
+                and attitude_star = #{attitudeStar}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into order_appraise(order_id, info, level, desc_star, logistics_star, attitude_star, created_at, updated_at)
+        values (#{orderId}, #{info}, #{level}, #{descStar}, #{logisticsStar}, #{attitudeStar}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into order_appraise(order_id, info, level, desc_star, logistics_star, attitude_star, created_at, updated_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.orderId}, #{entity.info}, #{entity.level}, #{entity.descStar}, #{entity.logisticsStar}, #{entity.attitudeStar}, #{entity.createdAt}, #{entity.updatedAt})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into order_appraise(order_id, info, level, desc_star, logistics_star, attitude_star, created_at, updated_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.orderId}, #{entity.info}, #{entity.level}, #{entity.descStar}, #{entity.logisticsStar}, #{entity.attitudeStar}, #{entity.createdAt}, #{entity.updatedAt})
+        </foreach>
+        on duplicate key update
+        order_id = values(order_id),
+        info = values(info),
+        level = values(level),
+        desc_star = values(desc_star),
+        logistics_star = values(logistics_star),
+        attitude_star = values(attitude_star),
+        created_at = values(created_at),
+        updated_at = values(updated_at)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update order_appraise
+        <set>
+            <if test="orderId != null">
+                order_id = #{orderId},
+            </if>
+            <if test="info != null and info != ''">
+                info = #{info},
+            </if>
+            <if test="level != null">
+                level = #{level},
+            </if>
+            <if test="descStar != null">
+                desc_star = #{descStar},
+            </if>
+            <if test="logisticsStar != null">
+                logistics_star = #{logisticsStar},
+            </if>
+            <if test="attitudeStar != null">
+                attitude_star = #{attitudeStar},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from order_appraise where id = #{id}
+    </delete>
+
+</mapper>
+

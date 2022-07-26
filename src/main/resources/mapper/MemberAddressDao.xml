@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="prv.rcl.dao.MemberAddressDao">
+
+    <resultMap id="BaseResultMap" type="prv.rcl.entity.MemberAddress">
+        <!--@Table member_address-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="memberId" column="member_id" jdbcType="INTEGER"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="tel" column="tel" jdbcType="VARCHAR"/>
+        <result property="prov" column="prov" jdbcType="INTEGER"/>
+        <result property="city" column="city" jdbcType="INTEGER"/>
+        <result property="area" column="area" jdbcType="INTEGER"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="number" column="number" jdbcType="INTEGER"/>
+        <result property="default" column="default" jdbcType="VARCHAR"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, member_id, nick_name, tel, prov, city, area, address, number, default, deleted_at, created_at, updated_at
+        from member_address
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, member_id, nick_name, tel, prov, city, area, address, number, default, deleted_at, created_at, updated_at
+        from member_address
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="memberId != null">
+                and member_id = #{memberId}
+            </if>
+            <if test="nickName != null and nickName != ''">
+                and nick_name = #{nickName}
+            </if>
+            <if test="tel != null and tel != ''">
+                and tel = #{tel}
+            </if>
+            <if test="prov != null">
+                and prov = #{prov}
+            </if>
+            <if test="city != null">
+                and city = #{city}
+            </if>
+            <if test="area != null">
+                and area = #{area}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="number != null">
+                and number = #{number}
+            </if>
+            <if test="default != null">
+                and default = #{default}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, member_id, nick_name, tel, prov, city, area, address, number, default, deleted_at, created_at, updated_at
+        from mail.member_address
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from member_address
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="memberId != null">
+                and member_id = #{memberId}
+            </if>
+            <if test="nickName != null and nickName != ''">
+                and nick_name = #{nickName}
+            </if>
+            <if test="tel != null and tel != ''">
+                and tel = #{tel}
+            </if>
+            <if test="prov != null">
+                and prov = #{prov}
+            </if>
+            <if test="city != null">
+                and city = #{city}
+            </if>
+            <if test="area != null">
+                and area = #{area}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="number != null">
+                and number = #{number}
+            </if>
+            <if test="default != null">
+                and default = #{default}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into member_address(member_id, nick_name, tel, prov, city, area, address, number, default, deleted_at, created_at, updated_at)
+        values (#{memberId}, #{nickName}, #{tel}, #{prov}, #{city}, #{area}, #{address}, #{number}, #{default}, #{deletedAt}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into member_address(member_id, nick_name, tel, prov, city, area, address, number, default, deleted_at, created_at, updated_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.memberId}, #{entity.nickName}, #{entity.tel}, #{entity.prov}, #{entity.city}, #{entity.area}, #{entity.address}, #{entity.number}, #{entity.default}, #{entity.deletedAt}, #{entity.createdAt}, #{entity.updatedAt})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into member_address(member_id, nick_name, tel, prov, city, area, address, number, default, deleted_at, created_at, updated_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.memberId}, #{entity.nickName}, #{entity.tel}, #{entity.prov}, #{entity.city}, #{entity.area}, #{entity.address}, #{entity.number}, #{entity.default}, #{entity.deletedAt}, #{entity.createdAt}, #{entity.updatedAt})
+        </foreach>
+        on duplicate key update
+        member_id = values(member_id),
+        nick_name = values(nick_name),
+        tel = values(tel),
+        prov = values(prov),
+        city = values(city),
+        area = values(area),
+        address = values(address),
+        number = values(number),
+        default = values(default),
+        deleted_at = values(deleted_at),
+        created_at = values(created_at),
+        updated_at = values(updated_at)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update member_address
+        <set>
+            <if test="memberId != null">
+                member_id = #{memberId},
+            </if>
+            <if test="nickName != null and nickName != ''">
+                nick_name = #{nickName},
+            </if>
+            <if test="tel != null and tel != ''">
+                tel = #{tel},
+            </if>
+            <if test="prov != null">
+                prov = #{prov},
+            </if>
+            <if test="city != null">
+                city = #{city},
+            </if>
+            <if test="area != null">
+                area = #{area},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="number != null">
+                number = #{number},
+            </if>
+            <if test="default != null">
+                default = #{default},
+            </if>
+            <if test="deletedAt != null">
+                deleted_at = #{deletedAt},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from member_address where id = #{id}
+    </delete>
+
+</mapper>
+

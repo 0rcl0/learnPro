@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="prv.rcl.dao.ProductAlbumDao">
+
+    <resultMap id="BaseResultMap" type="prv.rcl.entity.ProductAlbum">
+        <!--@Table product_album-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="productId" column="product_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="size" column="size" jdbcType="INTEGER"/>
+        <result property="intro" column="intro" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, product_id, name, url, size, intro, sort, status, state, created_at, updated_at
+        from product_album
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, product_id, name, url, size, intro, sort, status, state, created_at, updated_at
+        from product_album
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="url != null and url != ''">
+                and url = #{url}
+            </if>
+            <if test="size != null">
+                and size = #{size}
+            </if>
+            <if test="intro != null and intro != ''">
+                and intro = #{intro}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, product_id, name, url, size, intro, sort, status, state, created_at, updated_at
+        from mail.product_album
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from product_album
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="productId != null">
+                and product_id = #{productId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="url != null and url != ''">
+                and url = #{url}
+            </if>
+            <if test="size != null">
+                and size = #{size}
+            </if>
+            <if test="intro != null and intro != ''">
+                and intro = #{intro}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into product_album(product_id, name, url, size, intro, sort, status, state, created_at, updated_at)
+        values (#{productId}, #{name}, #{url}, #{size}, #{intro}, #{sort}, #{status}, #{state}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into product_album(product_id, name, url, size, intro, sort, status, state, created_at, updated_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.productId}, #{entity.name}, #{entity.url}, #{entity.size}, #{entity.intro}, #{entity.sort}, #{entity.status}, #{entity.state}, #{entity.createdAt}, #{entity.updatedAt})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into product_album(product_id, name, url, size, intro, sort, status, state, created_at, updated_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.productId}, #{entity.name}, #{entity.url}, #{entity.size}, #{entity.intro}, #{entity.sort}, #{entity.status}, #{entity.state}, #{entity.createdAt}, #{entity.updatedAt})
+        </foreach>
+        on duplicate key update
+        product_id = values(product_id),
+        name = values(name),
+        url = values(url),
+        size = values(size),
+        intro = values(intro),
+        sort = values(sort),
+        status = values(status),
+        state = values(state),
+        created_at = values(created_at),
+        updated_at = values(updated_at)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update product_album
+        <set>
+            <if test="productId != null">
+                product_id = #{productId},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="url != null and url != ''">
+                url = #{url},
+            </if>
+            <if test="size != null">
+                size = #{size},
+            </if>
+            <if test="intro != null and intro != ''">
+                intro = #{intro},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from product_album where id = #{id}
+    </delete>
+
+</mapper>
+

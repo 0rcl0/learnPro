@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="prv.rcl.dao.ProductDao">
+
+    <resultMap id="BaseResultMap" type="prv.rcl.entity.Product">
+        <!--@Table product-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
+        <result property="merId" column="mer_id" jdbcType="INTEGER"/>
+        <result property="freightId" column="freight_id" jdbcType="INTEGER"/>
+        <result property="typeId" column="type_id" jdbcType="INTEGER"/>
+        <result property="sketch" column="sketch" jdbcType="VARCHAR"/>
+        <result property="intro" column="intro" jdbcType="VARCHAR"/>
+        <result property="keywords" column="keywords" jdbcType="VARCHAR"/>
+        <result property="tags" column="tags" jdbcType="VARCHAR"/>
+        <result property="marque" column="marque" jdbcType="VARCHAR"/>
+        <result property="barcode" column="barcode" jdbcType="VARCHAR"/>
+        <result property="brandId" column="brand_id" jdbcType="INTEGER"/>
+        <result property="virtual" column="virtual" jdbcType="INTEGER"/>
+        <result property="price" column="price" jdbcType="NUMERIC"/>
+        <result property="marketPrice" column="market_price" jdbcType="NUMERIC"/>
+        <result property="integral" column="integral" jdbcType="INTEGER"/>
+        <result property="stock" column="stock" jdbcType="INTEGER"/>
+        <result property="warningStock" column="warning_stock" jdbcType="INTEGER"/>
+        <result property="pictureUrl" column="picture_url" jdbcType="VARCHAR"/>
+        <result property="posters" column="posters" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="isPackage" column="is_package" jdbcType="VARCHAR"/>
+        <result property="isIntegral" column="is_integral" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="deletedAt" column="deleted_at" jdbcType="TIMESTAMP"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, name, category_id, mer_id, freight_id, type_id, sketch, intro, keywords, tags, marque, barcode, brand_id, virtual, price, market_price, integral, stock, warning_stock, picture_url, posters, status, state, is_package, is_integral, sort, deleted_at, created_at, updated_at
+        from product
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, name, category_id, mer_id, freight_id, type_id, sketch, intro, keywords, tags, marque, barcode, brand_id, virtual, price, market_price, integral, stock, warning_stock, picture_url, posters, status, state, is_package, is_integral, sort, deleted_at, created_at, updated_at
+        from product
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="merId != null">
+                and mer_id = #{merId}
+            </if>
+            <if test="freightId != null">
+                and freight_id = #{freightId}
+            </if>
+            <if test="typeId != null">
+                and type_id = #{typeId}
+            </if>
+            <if test="sketch != null and sketch != ''">
+                and sketch = #{sketch}
+            </if>
+            <if test="intro != null and intro != ''">
+                and intro = #{intro}
+            </if>
+            <if test="keywords != null and keywords != ''">
+                and keywords = #{keywords}
+            </if>
+            <if test="tags != null and tags != ''">
+                and tags = #{tags}
+            </if>
+            <if test="marque != null and marque != ''">
+                and marque = #{marque}
+            </if>
+            <if test="barcode != null and barcode != ''">
+                and barcode = #{barcode}
+            </if>
+            <if test="brandId != null">
+                and brand_id = #{brandId}
+            </if>
+            <if test="virtual != null">
+                and virtual = #{virtual}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="marketPrice != null">
+                and market_price = #{marketPrice}
+            </if>
+            <if test="integral != null">
+                and integral = #{integral}
+            </if>
+            <if test="stock != null">
+                and stock = #{stock}
+            </if>
+            <if test="warningStock != null">
+                and warning_stock = #{warningStock}
+            </if>
+            <if test="pictureUrl != null and pictureUrl != ''">
+                and picture_url = #{pictureUrl}
+            </if>
+            <if test="posters != null and posters != ''">
+                and posters = #{posters}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="isPackage != null">
+                and is_package = #{isPackage}
+            </if>
+            <if test="isIntegral != null">
+                and is_integral = #{isIntegral}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, name, category_id, mer_id, freight_id, type_id, sketch, intro, keywords, tags, marque, barcode, brand_id, virtual, price, market_price, integral, stock, warning_stock, picture_url, posters, status, state, is_package, is_integral, sort, deleted_at, created_at, updated_at
+        from mail.product
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from product
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="merId != null">
+                and mer_id = #{merId}
+            </if>
+            <if test="freightId != null">
+                and freight_id = #{freightId}
+            </if>
+            <if test="typeId != null">
+                and type_id = #{typeId}
+            </if>
+            <if test="sketch != null and sketch != ''">
+                and sketch = #{sketch}
+            </if>
+            <if test="intro != null and intro != ''">
+                and intro = #{intro}
+            </if>
+            <if test="keywords != null and keywords != ''">
+                and keywords = #{keywords}
+            </if>
+            <if test="tags != null and tags != ''">
+                and tags = #{tags}
+            </if>
+            <if test="marque != null and marque != ''">
+                and marque = #{marque}
+            </if>
+            <if test="barcode != null and barcode != ''">
+                and barcode = #{barcode}
+            </if>
+            <if test="brandId != null">
+                and brand_id = #{brandId}
+            </if>
+            <if test="virtual != null">
+                and virtual = #{virtual}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="marketPrice != null">
+                and market_price = #{marketPrice}
+            </if>
+            <if test="integral != null">
+                and integral = #{integral}
+            </if>
+            <if test="stock != null">
+                and stock = #{stock}
+            </if>
+            <if test="warningStock != null">
+                and warning_stock = #{warningStock}
+            </if>
+            <if test="pictureUrl != null and pictureUrl != ''">
+                and picture_url = #{pictureUrl}
+            </if>
+            <if test="posters != null and posters != ''">
+                and posters = #{posters}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="isPackage != null">
+                and is_package = #{isPackage}
+            </if>
+            <if test="isIntegral != null">
+                and is_integral = #{isIntegral}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into product(name, category_id, mer_id, freight_id, type_id, sketch, intro, keywords, tags, marque, barcode, brand_id, virtual, price, market_price, integral, stock, warning_stock, picture_url, posters, status, state, is_package, is_integral, sort, deleted_at, created_at, updated_at)
+        values (#{name}, #{categoryId}, #{merId}, #{freightId}, #{typeId}, #{sketch}, #{intro}, #{keywords}, #{tags}, #{marque}, #{barcode}, #{brandId}, #{virtual}, #{price}, #{marketPrice}, #{integral}, #{stock}, #{warningStock}, #{pictureUrl}, #{posters}, #{status}, #{state}, #{isPackage}, #{isIntegral}, #{sort}, #{deletedAt}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into product(name, category_id, mer_id, freight_id, type_id, sketch, intro, keywords, tags, marque, barcode, brand_id, virtual, price, market_price, integral, stock, warning_stock, picture_url, posters, status, state, is_package, is_integral, sort, deleted_at, created_at, updated_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.name}, #{entity.categoryId}, #{entity.merId}, #{entity.freightId}, #{entity.typeId}, #{entity.sketch}, #{entity.intro}, #{entity.keywords}, #{entity.tags}, #{entity.marque}, #{entity.barcode}, #{entity.brandId}, #{entity.virtual}, #{entity.price}, #{entity.marketPrice}, #{entity.integral}, #{entity.stock}, #{entity.warningStock}, #{entity.pictureUrl}, #{entity.posters}, #{entity.status}, #{entity.state}, #{entity.isPackage}, #{entity.isIntegral}, #{entity.sort}, #{entity.deletedAt}, #{entity.createdAt}, #{entity.updatedAt})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into product(name, category_id, mer_id, freight_id, type_id, sketch, intro, keywords, tags, marque, barcode, brand_id, virtual, price, market_price, integral, stock, warning_stock, picture_url, posters, status, state, is_package, is_integral, sort, deleted_at, created_at, updated_at)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.categoryId}, #{entity.merId}, #{entity.freightId}, #{entity.typeId}, #{entity.sketch}, #{entity.intro}, #{entity.keywords}, #{entity.tags}, #{entity.marque}, #{entity.barcode}, #{entity.brandId}, #{entity.virtual}, #{entity.price}, #{entity.marketPrice}, #{entity.integral}, #{entity.stock}, #{entity.warningStock}, #{entity.pictureUrl}, #{entity.posters}, #{entity.status}, #{entity.state}, #{entity.isPackage}, #{entity.isIntegral}, #{entity.sort}, #{entity.deletedAt}, #{entity.createdAt}, #{entity.updatedAt})
+        </foreach>
+        on duplicate key update
+        name = values(name),
+        category_id = values(category_id),
+        mer_id = values(mer_id),
+        freight_id = values(freight_id),
+        type_id = values(type_id),
+        sketch = values(sketch),
+        intro = values(intro),
+        keywords = values(keywords),
+        tags = values(tags),
+        marque = values(marque),
+        barcode = values(barcode),
+        brand_id = values(brand_id),
+        virtual = values(virtual),
+        price = values(price),
+        market_price = values(market_price),
+        integral = values(integral),
+        stock = values(stock),
+        warning_stock = values(warning_stock),
+        picture_url = values(picture_url),
+        posters = values(posters),
+        status = values(status),
+        state = values(state),
+        is_package = values(is_package),
+        is_integral = values(is_integral),
+        sort = values(sort),
+        deleted_at = values(deleted_at),
+        created_at = values(created_at),
+        updated_at = values(updated_at)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update product
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId},
+            </if>
+            <if test="merId != null">
+                mer_id = #{merId},
+            </if>
+            <if test="freightId != null">
+                freight_id = #{freightId},
+            </if>
+            <if test="typeId != null">
+                type_id = #{typeId},
+            </if>
+            <if test="sketch != null and sketch != ''">
+                sketch = #{sketch},
+            </if>
+            <if test="intro != null and intro != ''">
+                intro = #{intro},
+            </if>
+            <if test="keywords != null and keywords != ''">
+                keywords = #{keywords},
+            </if>
+            <if test="tags != null and tags != ''">
+                tags = #{tags},
+            </if>
+            <if test="marque != null and marque != ''">
+                marque = #{marque},
+            </if>
+            <if test="barcode != null and barcode != ''">
+                barcode = #{barcode},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId},
+            </if>
+            <if test="virtual != null">
+                virtual = #{virtual},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="marketPrice != null">
+                market_price = #{marketPrice},
+            </if>
+            <if test="integral != null">
+                integral = #{integral},
+            </if>
+            <if test="stock != null">
+                stock = #{stock},
+            </if>
+            <if test="warningStock != null">
+                warning_stock = #{warningStock},
+            </if>
+            <if test="pictureUrl != null and pictureUrl != ''">
+                picture_url = #{pictureUrl},
+            </if>
+            <if test="posters != null and posters != ''">
+                posters = #{posters},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="isPackage != null">
+                is_package = #{isPackage},
+            </if>
+            <if test="isIntegral != null">
+                is_integral = #{isIntegral},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="deletedAt != null">
+                deleted_at = #{deletedAt},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from product where id = #{id}
+    </delete>
+
+</mapper>
+

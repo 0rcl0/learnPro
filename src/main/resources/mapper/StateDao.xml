@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="prv.rcl.dao.StateDao">
+    <sql id="baseColumn">
+        id,country_id,code,name,cname,lower_name,code_full,area_id
+    </sql>
+    <select id="queryByCountryId" resultType="prv.rcl.entity.State">
+        select s.*
+        from states s,countries c
+        where c.id = s.country_id
+          and c.id = #{country_id};
+    </select>
+    <select id="selectById" resultType="prv.rcl.entity.State">
+        select
+        <include refid="baseColumn"/>
+        from states
+        where id = #{state_id}
+    </select>
+</mapper>
