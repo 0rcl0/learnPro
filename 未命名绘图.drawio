@@ -1,1 +1,95 @@
-<mxfile host="app.diagrams.net" modified="2022-11-09T13:43:44.856Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15" version="20.5.3" etag="oj4b5NNJAMYiyXFlIaFh" type="github"><diagram id="XijuMgo_nmYrZ2-ohsCQ">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-11-09T13:56:01.763Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15" etag="3sFprEzXGzr-A9OfiavX" version="20.5.3" type="github">
+  <diagram id="XijuMgo_nmYrZ2-ohsCQ" name="第 1 页">
+    <mxGraphModel dx="1879" dy="637" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqCNNUfYSHpSgGsdoWdT-1" target="KqCNNUfYSHpSgGsdoWdT-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-1" value="实例化" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="200" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqCNNUfYSHpSgGsdoWdT-2" target="KqCNNUfYSHpSgGsdoWdT-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-2" value="填充属性" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqCNNUfYSHpSgGsdoWdT-4" target="KqCNNUfYSHpSgGsdoWdT-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-4" value="调用 BeanNameAware的setBeanName()方法" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="190" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqCNNUfYSHpSgGsdoWdT-6" target="KqCNNUfYSHpSgGsdoWdT-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-6" value="调用BeanFactoryAware的setBean&lt;span style=&quot;white-space: pre;&quot;&gt;Factory()方法&lt;/span&gt;" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="180" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqCNNUfYSHpSgGsdoWdT-8" target="KqCNNUfYSHpSgGsdoWdT-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="742" y="120" />
+              <mxPoint x="742" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-8" value="调用 ApplicationContextAware的setApplicationContext()方法" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="657" y="175" width="170" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqCNNUfYSHpSgGsdoWdT-10" target="KqCNNUfYSHpSgGsdoWdT-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-10" value="调用 BeanPostProcessors的预初始化方法" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="10" width="152" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqCNNUfYSHpSgGsdoWdT-12" target="KqCNNUfYSHpSgGsdoWdT-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-12" value="调用 InitializingBean 的 afterPropertiesSet()方法" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="10" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqCNNUfYSHpSgGsdoWdT-16" target="KqCNNUfYSHpSgGsdoWdT-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-16" value="调用定制的初始化方法" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="285" y="10" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqCNNUfYSHpSgGsdoWdT-18" target="KqCNNUfYSHpSgGsdoWdT-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-18" value="调用BeanPostProcessors&lt;br&gt;的后初始化方法" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="7.5" width="160" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-20" value="Bean 就可以被使用了" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="-60" y="293" width="160" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-22" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-80" y="410" as="sourcePoint" />
+            <mxPoint x="140" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqCNNUfYSHpSgGsdoWdT-23">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="525" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-23" value="容器关闭" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="430" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KqCNNUfYSHpSgGsdoWdT-27" target="KqCNNUfYSHpSgGsdoWdT-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-27" value="调用 DisposableBean 的 desotry()方法" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="525" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KqCNNUfYSHpSgGsdoWdT-28" value="调用定制的销毁方法" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="525" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
