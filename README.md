@@ -20,7 +20,6 @@ BeanFactory 的 JavaDOC 上有 bean 的生命周期
 ```
 
 bean 的生命周期
-
 实例化 开辟空间
 填充属性
 执行 aware 接口需要实现的方法 设置属性值
